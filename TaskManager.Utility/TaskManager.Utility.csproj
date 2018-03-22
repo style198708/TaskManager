@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2E459E4C-3DE6-4E51-A101-9B48E7E93BFD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TaskManager.Utility</RootNamespace>
+    <AssemblyName>TaskManager.Utility</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\Lib\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging">
+      <HintPath>..\Lib\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core">
+      <HintPath>..\Lib\Common.Logging.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper">
+      <HintPath>..\Lib\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="HttpHelper">
+      <HintPath>..\Lib\HttpHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\Lib\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Ionic.Zip">
+      <HintPath>..\Lib\Ionic.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\Lib\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Nancy">
+      <HintPath>..\Lib\Nancy.dll</HintPath>
+    </Reference>
+    <Reference Include="Nancy.Authentication.Forms">
+      <HintPath>..\Lib\Nancy.Authentication.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="Nancy.Hosting.Self">
+      <HintPath>..\Lib\Nancy.Hosting.Self.dll</HintPath>
+    </Reference>
+    <Reference Include="Nancy.ViewEngines.Razor">
+      <HintPath>..\Lib\Nancy.ViewEngines.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI">
+      <HintPath>..\Lib\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NVelocity">
+      <HintPath>..\Lib\NVelocity.dll</HintPath>
+    </Reference>
+    <Reference Include="Quartz">
+      <HintPath>..\Lib\Quartz.dll</HintPath>
+    </Reference>
+    <Reference Include="RabbitMQ.Client">
+      <HintPath>..\Lib\RabbitMQ.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>..\Lib\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Threading.Tasks" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\Lib\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Admin\AdminRun.cs" />
+    <Compile Include="Admin\MachineNumber.cs" />
+    <Compile Include="Auth\UserInfo.cs" />
+    <Compile Include="Auth\UserService.cs" />
+    <Compile Include="Command\ClsCommand.cs" />
+    <Compile Include="Command\CommandHelp.cs" />
+    <Compile Include="Command\ExitCommand.cs" />
+    <Compile Include="Command\HelpCommand.cs" />
+    <Compile Include="Command\HttpCommand.cs" />
+    <Compile Include="Command\ICommand.cs" />
+    <Compile Include="Command\LogCommand.cs" />
+    <Compile Include="Command\PortCommand.cs" />
+    <Compile Include="Command\RestartCommand.cs" />
+    <Compile Include="Command\WebResourceUpdateCommand.cs" />
+    <Compile Include="Common\Tags.cs" />
+    <Compile Include="Common\UserAccount.cs" />
+    <Compile Include="ConfigHandler\ConfigAttribute.cs" />
+    <Compile Include="ConfigHandler\ConfigDescription.cs" />
+    <Compile Include="ConfigHandler\ConfigManager.cs" />
+    <Compile Include="ConfigHandler\ConfigOption.cs" />
+    <Compile Include="ConfigHandler\ConfigTypeAttribute.cs" />
+    <Compile Include="ConfigHandler\Config\RabbitConfig.cs" />
+    <Compile Include="ConfigHandler\Config\SystemConfig.cs" />
+    <Compile Include="ConfigHandler\Config\TaskConfig.cs" />
+    <Compile Include="ConfigHandler\IConfigService.cs" />
+    <Compile Include="ConfigHandler\Options.cs" />
+    <Compile Include="Config\ConfigInit.cs" />
+    <Compile Include="Config\SysConfig.cs" />
+    <Compile Include="DB\ConvertExt.cs" />
+    <Compile Include="DB\DapperExtends.cs" />
+    <Compile Include="DB\DapperHelper.cs" />
+    <Compile Include="DB\DbHelper.cs" />
+    <Compile Include="DB\ExpressCompany.cs" />
+    <Compile Include="DB\Reflection\DynamicMethodEmit.cs" />
+    <Compile Include="DB\Reflection\MethodWrapper.cs" />
+    <Compile Include="DB\Reflection\PropertyWrapper.cs" />
+    <Compile Include="DB\Reflection\ReflectionExtensions.cs" />
+    <Compile Include="DB\SQLHelper.cs" />
+    <Compile Include="DB\Xml\MyCDATA.cs" />
+    <Compile Include="DB\Xml\XmlCommandItem.cs" />
+    <Compile Include="DB\Xml\XmlCommandManager.cs" />
+    <Compile Include="DB\Xml\XmlHelper.cs" />
+    <Compile Include="Encrypt\DESEncrypt.cs" />
+    <Compile Include="EntityCode\EntityCodeHelper.cs" />
+    <Compile Include="Enum\EnumHelper.cs" />
+    <Compile Include="Excel\ColumnInfo.cs" />
+    <Compile Include="Excel\ExcelImporMapper.cs" />
+    <Compile Include="Excel\ExcelImport.cs" />
+    <Compile Include="Excel\ExcelInfo.cs" />
+    <Compile Include="Excel\ExcelUtil.cs" />
+    <Compile Include="Excel\NpoiHelper.cs" />
+    <Compile Include="File\FileHelper.cs" />
+    <Compile Include="Filter\ApiResult.cs" />
+    <Compile Include="Filter\Pagination.cs" />
+    <Compile Include="Filter\QueryCondition.cs" />
+    <Compile Include="Http\MimeHelper.cs" />
+    <Compile Include="Log\LogHelper.cs" />
+    <Compile Include="Mef\MefConfig.cs" />
+    <Compile Include="NVelocity\FileGen.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Quartz\CustomTriggerListener.cs" />
+    <Compile Include="Quartz\QuartzHelper.cs" />
+    <Compile Include="Quartz\RPCMonitorUtil.cs" />
+    <Compile Include="Quartz\ServerUtil.cs" />
+    <Compile Include="Quartz\SystemMonitorUtil.cs" />
+    <Compile Include="Quartz\TaskMonitorUtil.cs" />
+    <Compile Include="Quartz\TaskUtil.cs" />
+    <Compile Include="RabbitMQ\LogMessage.cs" />
+    <Compile Include="RabbitMQ\MessageTransmit.cs" />
+    <Compile Include="RabbitMQ\MessageTransmitAction.cs" />
+    <Compile Include="RabbitMQ\MQMessage.cs" />
+    <Compile Include="RabbitMQ\RabbitMQClient.cs" />
+    <Compile Include="Regex\RegexHelper.cs" />
+    <Compile Include="StaticExtend\DataTableListHelper.cs" />
+    <Compile Include="StaticExtend\StringExt.cs" />
+    <Compile Include="SystemRuntime\SystemHelp.cs" />
+    <Compile Include="Tags\ITagService.cs" />
+    <Compile Include="Tags\TagsSourceType.cs" />
+    <Compile Include="Time\TimeHelper.cs" />
+    <Compile Include="Zip\SharpZip.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

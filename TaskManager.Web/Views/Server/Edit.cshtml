@@ -1,0 +1,195 @@
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase
+@{
+    ViewBag.Title = "任务详情";
+}
+@section style{
+    <link rel="stylesheet" href="/Content/Scripts/plugins/iCheck/custom.css" />
+}
+
+<form class="form-horizontal" id="form_baseInfo" style="margin-top:20px;">
+    <input name="TaskID" type="hidden" />
+    <div class="row-fluid col-sm-10 col-sm-offset-1 mb15">
+        <p class="f16 fb">基本信息</p>
+        <hr>
+    </div>
+    <div class="row-fluid clearfix">
+        <div class="col-xs-6">
+            <div class="form-group">
+                <label class="col-sm-4 control-label">
+                    <span class="editing-mode f-sign">* </span>服务名：
+                </label>
+                <div class="col-sm-7">
+                    <input name="Name" type="text" class="form-control" required maxlength="100" placeholder="请输入服务名">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label">
+                    <span class="editing-mode f-sign">* </span>服务显示名称：
+                </label>
+                <div class="col-sm-7">
+                    <input name="ServerName" type="text" class="form-control" required maxlength="2000" placeholder="请输入服务显示名称">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label">
+                    <span class="editing-mode f-sign">* </span>是否成功：
+                </label>
+                <div class="col-sm-7">
+                    <div class="radio i-checks">
+                        <label>
+                            <input type="radio" disabled checked value="0" name="Status"><i></i>开启
+                        </label>
+                        <label>
+                            <input type="radio" disabled value="1" name="Status"><i></i>关闭
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group">
+                <label class="col-sm-3 control-label">
+                    <span class="editing-mode f-sign">* </span>服务文件：
+                </label>
+                <div class="col-sm-7">
+                    <input name="ServerFile" type="text" class="form-control" required maxlength="200" placeholder="请输入服务文件">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">
+                    <span class="editing-mode f-sign">* </span>文件路径：
+                </label>
+                <div class="col-sm-7">
+                    <input name="ServerPath" type="text" class="form-control" required maxlength="2000" placeholder="请输入文件路径">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">
+                    <span class="editing-mode f-sign">* </span>服务描述：
+                </label>
+                <div class="col-sm-7">
+                    <input name="ServerContent" type="text" class="form-control" required maxlength="200" placeholder="请输入服务描述">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="col-xs-12 pb15">
+            <div class="form-group">
+                <div class="col-sm-12 ta-c">
+                    <button class="editing-mode btn btn-primary btn-sm" id="btn_save">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section scripts{
+    <script src="~/Content/Scripts/plugins/iCheck/icheck.min.js"></script>
+    <script src="~/Content/Scripts/plugins/validate/jquery.validate.min.js"></script>
+    <script src="~/Content/Scripts/plugins/validate/messages_zh.min.js"></script>
+
+    <script>
+        var mode, id, formBaseInfo = null;
+        $(function () {
+            Ywdsoft.parse();
+            mode = $("#__mode").val();
+            id = $("#__id").val();
+            formBaseInfo = new Ywdsoft.Form("form_baseInfo");
+            //初始化页面数据
+            initData();
+            bindEvents();
+        });
+
+        //初始化数据
+        function initData() {
+            if (mode != WebState.ADD) {
+                //加载等待层
+                var index;
+                $.ajax({
+                    type: "get",
+                    url: "/Task/GetByID/" + id,
+                    dataType: "json",
+                    beforeSend: function () {
+                        //加载等待层
+                        index = layer.load(0);
+                    },
+                    complete: function () {
+                        layer.close(index);
+                    },
+                    success: function (data) {
+                        if (data.HasError) {
+                            layer.alert(data.Message);
+                        } else {
+                            formBaseInfo.setData(data.Result);
+                            formBaseInfo.setDisabled(mode == WebState.READ);
+                        }
+                    }
+                });
+            }
+        }
+
+        /*
+        * 功能：    保存表单数据
+        * 参数：    afterFunc  保存成功后执行的回调函数
+       */
+        function saveForm(afterFunc) {
+            if (!formBaseInfo.validate()) {
+                return;
+            }
+            var data = formBaseInfo.getData();
+
+            var type = "post";
+            var url = "/Server";
+            if (data.TaskID) {
+                type = "put";
+            }
+            var index;
+            $.ajax({
+                type: type,
+                url: url,
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                dataType: "json",
+                beforeSend: function () {
+                    //加载等待层
+                    index = layer.load(0);
+                },
+                complete: function () {
+                    layer.close(index);
+                },
+                success: function (data) {
+                    if (data.HasError) {
+                        layer.alert(data.Message);
+                        return;
+                    }
+                    if (typeof (afterFunc) == "function") {
+                        afterFunc(data.Result);
+                    }
+                }
+            });
+        }
+
+        ////事件绑定
+        function bindEvents() {
+            //保存
+            $("#btn_save").on("click", function () {
+                saveForm(setMode);
+            });
+
+            //保存关闭
+            $("#btn_saveAndClose").on("click", function () {
+                saveForm(closeWindow);
+            });
+
+            //保存新增
+            $("#btn_saveAndNew").on("click", function () {
+                saveForm(setModeNew);
+            });           
+        };
+    </script>
+}
+
